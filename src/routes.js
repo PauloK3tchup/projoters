@@ -2,12 +2,14 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./pages/Home";
 import Busca from "./pages/Busca";
 import Perfil from "./pages/Perfil";
 import Pedidos from "./pages/Pedidos";
 import Carteira from "./pages/Carteira";
+import Pagamentos from "./pages/Pagamentos";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -55,16 +57,27 @@ export default function Routes() {
           }}
         />
         <BottomTab.Screen
-          name="Perfil"
-          component={Perfil}
+          name="PerfilRoutes"
+          component={PerfilRoutes}
           options={{
+            headerShown: false,
             tabBarLabel: "Perfil",
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="person" size={24} color={color} />
+              <MaterialIcons name="person" color={color} size={26} />
             ),
           }}
         />
       </BottomTab.Navigator>
     </NavigationContainer>
+  );
+}
+const PerfilStack = createStackNavigator();
+
+function PerfilRoutes() {
+  return (
+    <PerfilStack.Navigator>
+      <PerfilStack.Screen name="Perfil" component={Perfil} />
+      <PerfilStack.Screen name="Pagamentos" component={Pagamentos} />
+    </PerfilStack.Navigator>
   );
 }
